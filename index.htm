@@ -3,13 +3,13 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   <meta http-equiv="cache-control" content="no-cache" />
-  <script type="text/javascript" src="jquery.js"></script>
-  <script type="text/javascript" src="plugins.js"></script>
-  <script type="text/javascript" src="engine.js"></script>
+  <!-- Modernized: use ES modules, no jQuery -->
+  <script type="module" src="src/index.js"></script>
   <link rel="stylesheet" type="text/css" href="global.css" />
   <title>Tetris, by Logan Engineering</title>
 </head>
 <body>
+  <div id="pauseoverlay" style="display:none"><div class="content">Paused</div></div>
   <div id="header">
     Tetris.
   </div>
@@ -43,15 +43,10 @@
         <div id="scoreboard"></div>
       </div>
       <div id="statisticsarea" class="smallcontainer">
-        <div id="statistics"></div>
         <h3>Statistics</h3>
+        <div id="statistics"></div>
       </div>
     </div>
   </div>
-
-  <div id="pauseoverlay">
-    <div class="content">paused</div>
-  </div>
-
 </body>
 </html>
