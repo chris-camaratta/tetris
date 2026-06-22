@@ -4,4 +4,4 @@ In June of 2026 I used CoPilot in VS Code to modernize the app into ES modules w
 
 More detailed information can be found in [the docs](docs\design.md)
 
-You can play the game [here](https://ccamarat.github.io/tetris), if you want.
+You can play the game [here](https://chris-camaratta.github.io/tetris), if you want.
