@@ -35,11 +35,13 @@ export default class GameSquare {
     this.occupied = block;
     this.elem.style.backgroundColor = 'transparent';
     this.blockElem.style.backgroundColor = block.getColor();
+    this.blockElem.style.filter = block.isActive ? 'none' : 'saturate(55%) brightness(85%)';
     this.blockElem.style.display = 'block';
   }
   empty() {
     this.occupied = null;
     this.elem.style.backgroundColor = 'transparent';
+    this.blockElem.style.filter = 'none';
     this.blockElem.style.display = 'none';
   }
   highlight() {
