@@ -11,7 +11,7 @@ The statistics section was added to help improve the randomness algorithm, which
 
 ### Scoring Points
 
-Scoring is handled by `ScoreBoard.updateScore(rowsCleared)`. Points earned are scaled based on the number of points scored, encouraging players (well, me...) to accumulate rows to maximize their score.
+Scoring is handled by `ScoreBoard.updateScore(rowsCleared)`. Points earned are scaled based on the number of rows cleared, encouraging players (well, me...) to accumulate rows to maximize their score.
 
 Algorithm:
     `pointsAwarded = factorial(rowsCleared) * 100`
@@ -24,35 +24,17 @@ This yields per-clear point values:
 
 ### Drop Speed Per Level
 
-Every time 10 lines are cleared the level is raised and the piece drop rate is increased. Automatic falling speed
-is computed by `Game._calculateTimerSpeed()` and applied via `Timer.setIntervalMs(...)`. Lower interval means faster
-falling.
+The game progresses the player through 15 levels. Every 10 lines that are cleared raises the level and the piece drop rate is increased. Automatic falling speed is computed by `Game._calculateTimerSpeed()` and applied via
+`Timer.setIntervalMs(...)`. Lower interval means faster falling.
 
-The initial version of this game used scaled drop speed using linear interpolation. This was very challenging; there
-was almost no perceivable difference between levels 1 and 7, but after that the game became very hard, very fast.
-The drop rate now follows a Pseudo‑logarithmic scale because it turns out that people perceive time differences
-logarithmically!
+The initial version of this game used scaled drop speed using linear interpolation to increment drop rate interval
+between min and max values based on the current level. This was very challenging to play; there was almost no
+perceivable difference between levels 1 and 9ish, but after that the game became very hard, very fast. The drop rate
+now follows a Pseudo‑logarithmic scale because, as it turns out, people perceive time differences logarithmically!
 
 Algorithm:
 
-1. Read current level from scoreboard.
-2. Use constants:
-
-    `maxTimeout = 1000 (ms)`
-
-3. Compute asymptote term:
-
-    `asymptote = (15 / -level) + (15 - 0.5)`
-
-4. Compute interval in milliseconds:
-
-    `intervalMs = maxTimeout * (15 - asymptote) / 15`
-
-5. When level changes, re-apply the computed interval to the running timer.
-
-Equivalent simplified form:
-
-`intervalMs = 1000 * ((0.5 + 15 / level) / 15)`
+`intervalMs = maxInterval * ((0.5 + 15 / level) / 15)`
 
 Examples:
 
